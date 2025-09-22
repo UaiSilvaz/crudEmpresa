@@ -46,10 +46,26 @@ public class EmpresaService {
     }
 
     public Empresa editarDadoEmpresa(Long id, Empresa dadosAtualizados) {
-        return null;
+        // .orElseThrow() //lança uma exceção se o valor não estiver presente
+
+        Empresa empresaBuscada = buscarPorId(id).orElseThrow(
+        () -> new IllegalArgumentException("Empresa não encontrada"));
+        //Set e Get setar os novos dados
+        // O método getter (get) retorna o valor de um atributo, enquanto o método setter (set) permite atribuir um novo valor a ele
+        empresaBuscada.setNome_empresa(dadosAtualizados.getNome_empresa());
+        empresaBuscada.setCnpj(dadosAtualizados.getCnpj());
+        empresaBuscada.setRamo(dadosAtualizados.getRamo());
+
+        return empresaRepository.save(empresaBuscada);
+        //save -> salva as alterações no banco de dados
+    
+    }
+
+    public List<Empresa> buscarEmpresaPorNome(String nome_empresa) {
+        return empresaRepository.findByNome_empresaContainingIgnoreCase(nome_empresa);
     }
 }
-
+// PESQUISE PROGRAMAÇÃO ESTRUTURADA
 // BANCO
 // SELECTS OU INSERTS OU ALTER TABLE OU DELETE
 // SELECT * FROM EMPRESA (SELECT REALIZA LISTAGEM DE DADOS)
