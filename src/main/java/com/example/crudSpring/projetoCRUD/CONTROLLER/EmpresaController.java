@@ -3,6 +3,8 @@ package com.example.crudSpring.projetoCRUD.CONTROLLER;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.crudSpring.projetoCRUD.ENTITY.Empresa;
@@ -17,6 +19,9 @@ public class EmpresaController {
     public EmpresaController(EmpresaService ligacaoEmpresaService) {
         empresaService = ligacaoEmpresaService;
     }
+
+    // chamada para listar todas as empresas
+
     // ligação com a classe service,chama a classe, Processe de instanciação de uma
     // classe. POO
 
@@ -25,12 +30,26 @@ public class EmpresaController {
     // metodo de chamar formulario de cadastro
     // mapeamento http
     @GetMapping("/viewCadEmpresa") // class //nome de acesso
-    public String mostrarFormCadastro(Model OModel) {
-        OModel.addAttribute("empresa", new Empresa());
+    public String mostrarFormCadastro(Model oModel) {
+        oModel.addAttribute("empresa", new Empresa());
         return "cadastroEmpresa"; // nome do html
     }
 
     // model = é classe que se comunica com o html, recebe os dados do frontend/
     // gerencia
     // OModel = nome do objeto que instancia a classe model
+
+    @PostMapping("/salvarEmpresa") // parametro
+    public String salvarEmpresa(@ModelAttribute Empresa objEmpresa) {
+        // chamando o método cadastrar e passando o objeto empresa com os dados que
+        // precisam ser salvos
+        empresaService.cadastrarEmpresa(objEmpresa);
+
+        return "redirect:/empresaCTR/viewCadEmpresa"; // redireciona para o formulario
+
+    }
+
 }
+
+// metodos post, get, put, delete
+// notations

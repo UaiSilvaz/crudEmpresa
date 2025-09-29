@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Empresa</title>
+</head>
+
+<body style="
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    margin: 0; height: 100vh; display: flex; justify-content: center; align-items: center;
+    background: linear-gradient(270deg, #6a0dad, #9b30ff, #4b0082, #8a2be2);
+    background-size: 800% 800%;
+    animation: gradientBG 20s ease infinite;
+    color: #e0d7f5;
+">
+
+    <style>
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Botão com animação */
+        .btn-animated {
+            margin-top: 10px;
+            background: #9b30ff;
+            color: white;
+            font-weight: 700;
+            padding: 14px 0;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(155, 48, 255, 0.6);
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .btn-animated:hover {
+            background: #7a1ed9;
+            box-shadow: 0 8px 25px rgba(155, 48, 255, 0.9);
+            transform: scale(1.05);
+        }
+
+        .btn-animated:active {
+            transform: scale(0.98);
+            box-shadow: 0 2px 10px rgba(155, 48, 255, 0.7);
+        }
+
+        /* Link cancelar com animação */
+        .link-cancel {
+            text-align: center;
+            margin-top: 10px;
+            color: #d1b3ff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+            user-select: none;
+            display: inline-block;
+        }
+
+        .link-cancel:hover {
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        .link-cancel:active {
+            transform: scale(0.95);
+        }
+
+        /* Inputs com foco animado */
+        input:focus {
+            box-shadow: 0 0 8px 2px #9b30ff !important;
+            outline: none;
+            transition: box-shadow 0.3s ease;
+        }
+    </style>
+
+    <div style="
+        background: linear-gradient(135deg, #6a0dad, #9b30ff);
+        padding: 40px 50px;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(155, 48, 255, 0.4);
+        width: 100%;
+        max-width: 420px;
+    ">
+        <h2 style="text-align: center; margin-bottom: 30px; font-weight: 700; letter-spacing: 1.2px;">Cadastrar Empresa
+        </h2>
+
+        <!-- Formulário para cadastro -->
+
+        <!--mapeamento-->
+        <form th:action="@{/empresaCTR/salvarEmpresa}" th:object="${empresa}" method="post"
+            style="display: flex; flex-direction: column; gap: 20px;">
+
+            <label for="nome" style="font-weight: 600; font-size: 1rem;">Nome da Empresa</label>
+            <input type="text" th:field="*{nome}" id="nome" placeholder="Digite o nome da empresa" required
+                style="padding: 12px 15px; border-radius: 8px; border: none; font-size: 1rem; outline: none; transition: box-shadow 0.3s ease;">
+
+            <label for="cnpj" style="font-weight: 600; font-size: 1rem;">CNPJ</label>
+            <input type="text" th:field="*{cnpj}" id="cnpj" required
+                style="padding: 12px 15px; border-radius: 8px; border: none; font-size: 1rem; outline: none; transition: box-shadow 0.3s ease;">
+
+            <label for="ramo" style="font-weight: 600; font-size: 1rem;">Ramo da Empresa</label>
+            <input type="text" th:field="*{ramo}" id="ramo" required
+                style="padding: 12px 15px; border-radius: 8px; border: none; font-size: 1rem; outline: none; transition: box-shadow 0.3s ease;">
+
+            <button type="submit" class="btn-animated">
+                Salvar
+            </button>
+
+            <a th:href="@{/empresaCTR/}" class="link-cancel">
+                Cancelar
+            </a>
+        </form>
+    </div>
+
+</body>
+
+</html>
