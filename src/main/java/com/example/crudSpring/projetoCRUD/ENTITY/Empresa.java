@@ -25,12 +25,12 @@ public class Empresa {
     private String nome;
 
     @Column(name = "cnpj", nullable = false, length = 20, unique = true)
-    private int cnpj;
+    private String cnpj; // <-- ALTERADO PARA STRING
 
     @Column(name = "ramo", nullable = false, length = 100)
     private String ramo;
 
-    public Empresa(String nome, int cnpj, String ramo) {
+    public Empresa(String nome, String cnpj, String ramo) {
         this.nome = nome;
         this.cnpj = cnpj;
         this.ramo = ramo;

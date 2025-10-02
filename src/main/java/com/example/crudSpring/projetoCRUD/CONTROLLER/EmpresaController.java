@@ -22,6 +22,12 @@ public class EmpresaController {
 
     // chamada para listar todas as empresas
 
+    @GetMapping("/listarTodasEmpresas")
+    public String listarEmpresas(Model oModel) {
+        oModel.addAttribute("empresas", empresaService.findAll());
+        return "listarEmpresas"; // nome do html
+    }
+
     // ligação com a classe service,chama a classe, Processe de instanciação de uma
     // classe. POO
 
@@ -45,7 +51,7 @@ public class EmpresaController {
         // precisam ser salvos
         empresaService.cadastrarEmpresa(objEmpresa);
 
-        return "redirect:/empresaCTR/viewCadEmpresa"; // redireciona para o formulario
+        return "redirect:/empresaCTR/listarTodasEmpresas"; // redireciona para o formulario
 
     }
 

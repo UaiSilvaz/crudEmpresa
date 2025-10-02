@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Empresas</title>
+</head>
+
+<body style="
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    margin: 0; height: 100vh; display: flex; justify-content: center; align-items: center;
+    background: linear-gradient(270deg, #6a0dad, #9b30ff, #4b0082, #8a2be2);
+    background-size: 800% 800%;
+    animation: gradientBG 20s ease infinite;
+    color: #e0d7f5;
+">
+
+    <style>
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Container para centralizar o conteúdo */
+        .container {
+            background: linear-gradient(135deg, #6a0dad, #9b30ff);
+            padding: 40px 50px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(155, 48, 255, 0.4);
+            width: 100%;
+            max-width: 900px;
+            overflow-x: auto;
+        }
+
+        /* Título */
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            color: #e0d7f5;
+        }
+
+        /* Estilo da tabela */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(155, 48, 255, 0.3);
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            color: #e0d7f5;
+        }
+
+        th {
+            background: linear-gradient(135deg, #9b30ff, #7a1ed9);
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        tr:hover {
+            background: rgba(155, 48, 255, 0.2);
+            transition: background 0.3s ease;
+        }
+
+        /* Links de ação como botões animados */
+        .action-link {
+            display: inline-block;
+            margin: 5px;
+            padding: 8px 16px;
+            background: #9b30ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(155, 48, 255, 0.4);
+            user-select: none;
+        }
+
+        .action-link:hover {
+            background: #7a1ed9;
+            box-shadow: 0 4px 12px rgba(155, 48, 255, 0.6);
+            transform: scale(1.05);
+        }
+
+        .action-link:active {
+            transform: scale(0.98);
+            box-shadow: 0 1px 4px rgba(155, 48, 255, 0.3);
+        }
+
+        /* Link para Nova Empresa */
+        .link-nova {
+            text-align: center;
+            margin-top: 20px;
+            display: inline-block;
+            color: #d1b3ff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 12px 24px;
+            background: rgba(155, 48, 255, 0.2);
+            border: 2px solid #9b30ff;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .link-nova:hover {
+            color: #fff;
+            background: #9b30ff;
+            transform: scale(1.05);
+        }
+
+        .link-nova:active {
+            transform: scale(0.98);
+        }
+    </style>
+
+    <div class="container">
+        <h2>Lista de Empresas</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>CNPJ</th>
+                    <th>Ramo</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Loop para listar todas as empresas -->
+                <!--  qlqr nome = empresa é chamada --> <!-- o ${chama os atributos} vem da controller-->
+                <tr th:each="empresa : ${empresas}">
+                    <td th:text="${empresa.id_empresa}"></td>
+                    <td th:text="${empresa.nome}"></td>
+                    <td th:text="${empresa.cnpj}"></td>
+                    <td th:text="${empresa.ramo}"></td>
+                    <td>
+                        <!-- Botão Editar -->
+                        <a th:href="@{/empresaCTR/editarEmpresa/{id}(id=${empresa.id_empresa})}"
+                            class="action-link">Editar</a>
+
+                        <!-- Botão Excluir -->
+                        <a th:href="@{/empresaCTR/deletarEmpresa/{id}(id=${empresa.id_empresa})}"
+                            onclick="return confirm('Deseja realmente excluir esta empresa?')"
+                            class="action-link">Excluir</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <br>
+
+        <a th:href="@{/empresaCTR/viewCadEmpresa}" class="link-nova">Nova Empresa</a>
+    </div>
+
+</body>
+
+</html>
