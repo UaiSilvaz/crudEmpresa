@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -53,6 +54,21 @@ public class EmpresaController {
 
         return "redirect:/empresaCTR/listarTodasEmpresas"; // redireciona para o formulario
 
+    }
+
+    @GetMapping("/editar/{id}")
+    public String formEditar(@PathVariable Long id, Model oModel) {
+        Empresa objEmpresa = empresaService.buscarPorId(id)
+                .orElseThrow(() -> new IllegalArgumentException("ID inválido: " + id));
+        oModel.addAttribute("empresaEditar", objEmpresa);
+        return "editarEmpresa";
+
+    }
+
+    @PostMapping("/atualizarEmpresa/{id}")
+    public String atualizarEmpresa(@PathVariable Long id,
+            @ModelAttribute Empresa objEmpresaAtualizada) {
+        return "redirect:/empresaCTR/listarTodasEmpresas";
     }
 
 }
