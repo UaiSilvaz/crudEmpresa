@@ -36,8 +36,8 @@ public class EmpresaService {
     }// metodo cadastrarEmpresa
 
     // sem retorno para ver retorno executar novo listar -> frontend
-    public void deletarEmpresa(Empresa dadosEmepresa) {
-        empresaRepository.delete(dadosEmepresa);
+    public void deletarEmpresa(Long ID) {
+        empresaRepository.deleteById(ID);
     }// metodo deletarEmpresa
 
     public Optional<Empresa> buscarPorId(Long id) {

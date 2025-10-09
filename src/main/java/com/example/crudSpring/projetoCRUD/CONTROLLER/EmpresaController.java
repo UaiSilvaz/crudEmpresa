@@ -66,11 +66,19 @@ public class EmpresaController {
     }
 
     @PostMapping("/atualizarEmpresa/{id}")
-    public String atualizarEmpresa(@PathVariable Long id,
+    public String atualizarEmpresa(@PathVariable("id") Long id,
             @ModelAttribute Empresa objEmpresaAtualizada) {
+        empresaService.editarDadoEmpresa(id, objEmpresaAtualizada);
         return "redirect:/empresaCTR/listarTodasEmpresas";
     }
 
+    @GetMapping("/deletarEmpresa/{id}")
+    public String deletarEmpresa(@PathVariable("id") Long id) {
+        empresaService.deletarEmpresa(id);
+
+        return "redirect:/empresaCTR/listarTodasEmpresas";
+
+    }
 }
 
 // metodos post, get, put, delete
