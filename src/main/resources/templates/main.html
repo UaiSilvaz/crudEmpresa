@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pagina Principal</title>
+</head>
+
+<body style="
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    margin: 0; height: 100vh; display: flex; justify-content: center; align-items: center;
+    background: linear-gradient(270deg, #6a0dad, #9b30ff, #4b0082, #8a2be2);
+    background-size: 800% 800%;
+    animation: gradientBG 20s ease infinite;
+    color: #e0d7f5;
+">
+
+    <style>
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Botão com animação */
+        .btn-animated {
+            margin-top: 10px;
+            background: #9b30ff;
+            color: white;
+            font-weight: 700;
+            padding: 14px 0;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(155, 48, 255, 0.6);
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .btn-animated:hover {
+            background: #7a1ed9;
+            box-shadow: 0 8px 25px rgba(155, 48, 255, 0.9);
+            transform: scale(1.05);
+        }
+
+        .btn-animated:active {
+            transform: scale(0.98);
+            box-shadow: 0 2px 10px rgba(155, 48, 255, 0.7);
+        }
+
+        /* Link cancelar com animação */
+        .link-cancel {
+            text-align: center;
+            margin-top: 10px;
+            color: #d1b3ff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+            user-select: none;
+            display: inline-block;
+        }
+
+        .link-cancel:hover {
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        .link-cancel:active {
+            transform: scale(0.95);
+        }
+
+        /* Inputs com foco animado */
+        input:focus {
+            box-shadow: 0 0 8px 2px #9b30ff !important;
+            outline: none;
+            transition: box-shadow 0.3s ease;
+        }
+    </style>
+
+    <div style="
+        background: linear-gradient(135deg, #6a0dad, #9b30ff);
+        padding: 40px 50px;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(155, 48, 255, 0.4);
+        width: 100%;
+        max-width: 420px;
+    ">
+        <h2 style="text-align: center; margin-bottom: 30px; font-weight: 700; letter-spacing: 1.2px;">Links para as
+            paginas
+        </h2>
+
+
+        <a th:href="@{/empresaCTR/viewCadEmpresa}" class="link-nova">Cadastrar Empresa</a>
+        <br>
+        <a th:href="@{/empresaCTR/listarTodasEmpresas}" class="link-nova">Listar todas as Empresas</a>
+        <br>
+        <a th:href="@{/empresaCTR/}" class="link-nova">Buscar Empresa por Nome</a>
+
+
+    </div>
+
+</body>
+
+</html>
