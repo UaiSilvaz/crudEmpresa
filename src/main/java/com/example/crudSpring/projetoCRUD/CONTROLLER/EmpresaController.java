@@ -83,9 +83,30 @@ public class EmpresaController {
 
     }
 
+    @GetMapping("/formBuscarNome")
+    public String mostrarFormBusca(Model oModel) {
+        return "buscarEmpresa";
+    }
+
     @GetMapping("/buscarEmpresaNome")
-    public List<Empresa> executarBuscaPorNome(@RequestParam("nome") String nome_empresa, Model oModel) {
-        return empresaService.buscarEmpresaPorNome(nome_empresa);
+    public String executarBuscaPorNome(@RequestParam("nome") String nome_empresa, Model oModel) {
+        // O método .isEmpty() retorna true se a string estiver vazia ("").
+        // O ! (negação) inverte isso, então a condição significa:
+        // "A string não está vazia".
+        // Mas se nome_empresa fosse null ou "vazio" = " ", o bloco não seria executado.
+        if (nome_empresa != null && !nome_empresa.isEmpty()) {
+            oModel.addAttribute("empresa.nome", empresaService.buscarEmpresaPorNome(nome_empresa));
+            // empresaService.buscarEmpresaPorNome(nome_empresa) → busca a empresa no banco
+            // de dados pelo nome.
+
+            // oModel.addAttribute(...) → envia o resultado da busca para a página.
+
+            // RESUMO
+            // “Coloca no modelo o resultado da busca da empresa pelo nome, para mostrar na
+            // tela.”
+        }
+
+        return "buscarEmpresa";
 
     }
 }
