@@ -1,7 +1,5 @@
 package com.example.crudSpring.projetoCRUD.CONTROLLER;
 
-import java.util.List;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -95,7 +93,7 @@ public class EmpresaController {
         // "A string não está vazia".
         // Mas se nome_empresa fosse null ou "vazio" = " ", o bloco não seria executado.
         if (nome_empresa != null && !nome_empresa.isEmpty()) {
-            oModel.addAttribute("empresa.nome", empresaService.buscarEmpresaPorNome(nome_empresa));
+            oModel.addAttribute("empresaNome", empresaService.buscarEmpresaPorNome(nome_empresa));
             // empresaService.buscarEmpresaPorNome(nome_empresa) → busca a empresa no banco
             // de dados pelo nome.
 
