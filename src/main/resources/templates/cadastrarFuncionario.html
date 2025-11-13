@@ -3,35 +3,142 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Cadastro Funcionario</title>
+    <title>Cadastro Funcionário</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(270deg, #6a0dad, #9b30ff, #4b0082, #8a2be2);
+            background-size: 800% 800%;
+            animation: gradientBG 20s ease infinite;
+            color: #e0d7f5;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .card {
+            background: linear-gradient(135deg, #6a0dad, #9b30ff);
+            padding: 40px 45px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 8px 20px rgba(155, 48, 255, 0.4);
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        label {
+            font-weight: 600;
+            display: block;
+            margin: 12px 0 5px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            background: #f6edff;
+            color: #4b0082;
+            transition: box-shadow 0.3s ease;
+        }
+
+        input:focus,
+        select:focus {
+            box-shadow: 0 0 8px 2px #bb75ff;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            margin-top: 15px;
+            background: #ffffff;
+            color: #6a0dad;
+            font-weight: 700;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-submit:hover {
+            background: #e9d6ff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-submit:active {
+            transform: scale(0.97);
+        }
+    </style>
 </head>
 
 <body>
+    <div class="card">
+        <h2>Cadastrar Funcionário</h2>
 
-    <h2>Cadastrar Funcionario</h2>
+        <form th:action="@{/funcionarioCTR/salvarFuncionario}" method="post" th:object="${funcionario}">
 
-    <form th:action="@{/funcionarioCTR/salvar}" method="post" th:object="${funcionario}">
+            <label>Nome:</label>
+            <input type="text" th:field="*{nome}" required>
 
-        <label>Nome:</label>
-        <input type="text" th:field="*{nome}" required><br>
+            <label>Cargo:</label>
+            <input type="text" th:field="*{cargo}" required>
 
-        <label>Cargo:</label>
-        <input type="text" th:field="*{cargo}" required><br>
+            <label>Salário:</label>
+            <input type="number" step="0.01" th:field="*{salario}" required>
 
-        <label>Salário:</label>
-        <input type="number" step="0.01" th:field="*{salario}" required><br>
+            <label>Empresa:</label>
+            <select th:field="*{identificadorEmpresa}" required>
+                <option value="">Selecione uma empresa</option>
+                <option th:each="emp : ${empresas}" th:value="${emp.id_empresa}" th:text="${emp.nome}"></option>
+            </select>
 
-        <label>Empresa:</label>
-        <select th:field="*{identificadorEmpresa}" required>
-            <option value="">Selecione uma empresa</option>
-            <option th:each="emp : ${empresas}" th:value="${emp.id_empresa}" th:text="${emp.nome}">
-            </option>
-        </select>
+            <button type="submit" class="btn-submit">Salvar</button>
 
-        <button type="submit">Salvar</button>
-
-    </form>
-
+        </form>
+    </div>
 </body>
 
 </html>

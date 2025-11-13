@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.crudSpring.projetoCRUD.ENTITY.Funcionario;
@@ -21,7 +23,10 @@ public class FuncionarioController {
 
     @GetMapping("/listarFunc")
     public String listarTodosFuncionario(Model oModel) {
+
         oModel.addAttribute("funcionarios", ligacaoFuncionarioService.listarTodosFuncionarios());
+
+        oModel.addAttribute("empresa", ligacaoEmpresaService.findAll());
 
         return "listarFuncionarios"; // nome do html
     }
@@ -32,6 +37,14 @@ public class FuncionarioController {
         oModel.addAttribute("funcionario", new Funcionario());
         oModel.addAttribute("empresas", ligacaoEmpresaService.findAll());
         return "cadastrarFuncionario"; // nome do html
+    }
+
+    @PostMapping("/salvarFuncionario")
+    public String cadastrarFuncionario(@ModelAttribute Funcionario objFuncionario) {
+        // TODO: process POST request
+
+        ligacaoFuncionarioService.cadastrarFuncionario(objFuncionario);
+        return "redirect:/funcionarioCTR/listarFunc";
     }
 
 }
