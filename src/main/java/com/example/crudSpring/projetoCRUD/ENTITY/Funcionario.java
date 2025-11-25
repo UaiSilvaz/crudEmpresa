@@ -29,7 +29,7 @@ public class Funcionario {
     @Column(name = "cargo", nullable = false, length = 20)
     private String cargo; // <-- ALTERADO PARA STRING
 
-    @Column(name = "salario", nullable = false, length = 100)
+    @Column(name = "salario", nullable = false, columnDefinition = "DECIMAL(10, 2)")
     private double salario;
 
     // Notattion um para muitos

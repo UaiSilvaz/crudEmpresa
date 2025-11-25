@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Funcionário</title>
+</head>
+
+<body style="
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    margin: 0; height: 100vh; display: flex; justify-content: center; align-items: center;
+    background: linear-gradient(270deg, #6a0dad, #9b30ff, #4b0082, #8a2be2);
+    background-size: 800% 800%;
+    animation: gradientBG 20s ease infinite;
+    color: #e0d7f5;
+">
+
+    <style>
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Container para centralizar o conteúdo */
+        .container {
+            background: linear-gradient(135deg, #6a0dad, #9b30ff);
+            padding: 40px 50px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(155, 48, 255, 0.4);
+            width: 100%;
+            max-width: 900px;
+            overflow-x: auto;
+        }
+
+        /* Título */
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            color: #e0d7f5;
+        }
+
+        /* Estilo do formulário */
+        form {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(155, 48, 255, 0.3);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #e0d7f5;
+            font-size: 1rem;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #e0d7f5;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #e0d7f5;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #9b30ff;
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 8px rgba(155, 48, 255, 0.4);
+        }
+
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #e0d7f5;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #9b30ff;
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 8px rgba(155, 48, 255, 0.4);
+        }
+
+        select option {
+            background: #2d1b4e;
+            color: #e0d7f5;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #9b30ff;
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 8px rgba(155, 48, 255, 0.4);
+        }
+
+        input[type="text"]::placeholder {
+            color: rgba(224, 215, 245, 0.7);
+        }
+
+        /* Botão de submit como botão animado */
+        button[type="submit"] {
+            display: inline-block;
+            margin: 5px;
+            padding: 12px 24px;
+            background: #9b30ff;
+            color: white;
+            border: none;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(155, 48, 255, 0.4);
+            user-select: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button[type="submit"]:hover {
+            background: #7a1ed9;
+            box-shadow: 0 4px 12px rgba(155, 48, 255, 0.6);
+            transform: scale(1.05);
+        }
+
+        button[type="submit"]:active {
+            transform: scale(0.98);
+            box-shadow: 0 1px 4px rgba(155, 48, 255, 0.3);
+        }
+
+        /* Link para voltar */
+        .link-voltar {
+            text-align: center;
+            margin-top: 20px;
+            display: inline-block;
+            color: #d1b3ff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 12px 24px;
+            background: rgba(155, 48, 255, 0.2);
+            border: 2px solid #9b30ff;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .link-voltar:hover {
+            color: #fff;
+            background: #9b30ff;
+            transform: scale(1.05);
+        }
+
+        .link-voltar:active {
+            transform: scale(0.98);
+        }
+
+        br {
+            display: block;
+            margin: 10px 0;
+        }
+    </style>
+
+    <div class="container">
+        <h1>Editar Funcionário</h1>
+
+        <form th:action="@{'/funcionarioCTR/atualizarFuncionario/'+${funcionarioEditar.codigo}}"
+            th:object="${funcionarioEditar}" method="post">
+            <label for="nome">Nome do Funcionário:</label>
+            <input type="text" id="nome" th:field="*{nome}" required>
+            <br><br>
+
+            <label for="cargo">Cargo:</label>
+            <input type="text" id="cargo" th:field="*{cargo}" required>
+            <br><br>
+
+            <label for="salario">Salário:</label>
+            <input type="number" id="salario" th:field="*{salario}" step="0.01" required>
+            <br><br>
+
+            <label for="empresa">Empresa:</label>
+            <select id="empresa" th:field="*{identificadorEmpresa.id_empresa}" required>
+                <option value="">Selecione uma empresa</option>
+                <option th:each="emp : ${empresas}" th:value="${emp.id_empresa}" th:text="${emp.nome}"></option>
+            </select>
+            <br><br>
+
+            <button type="submit">Salvar Alterações</button>
+        </form>
+
+        <br>
+        <a th:href="@{/funcionarioCTR/listarFunc}" class="link-voltar">Voltar à Lista de Funcionários</a>
+    </div>
+
+</body>
+
+</html>

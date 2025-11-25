@@ -39,9 +39,9 @@
                 <td th:text="${func.salario}"></td>
                 <td th:text="${func.identificadorEmpresa.nome}"></td>
                 <td>
-                    <a th:href="@{/funcionarioCTR//{id}(id=${func.codigo})}">Editar</a>
+                    <a th:href="@{/funcionarioCTR/editarFunc/{id}(id=${func.codigo})}">Editar</a>
 
-                    <a th:href="@{/funcionarioCTR//{id}(id=${func.codigo})}"
+                    <a th:href="@{/funcionarioCTR/deletarFuncionario/{id}(id=${func.codigo})}"
                         onclick="return confirm('Deseja realmente excluir este Funcionário?')">Excluir</a>
                 </td>
             </tr>
