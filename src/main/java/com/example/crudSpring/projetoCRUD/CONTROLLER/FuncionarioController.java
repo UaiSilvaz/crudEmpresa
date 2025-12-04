@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.crudSpring.projetoCRUD.ENTITY.Funcionario;
 import com.example.crudSpring.projetoCRUD.SERVICE.EmpresaService;
@@ -73,4 +74,33 @@ public class FuncionarioController {
         return "redirect:/funcionarioCTR/listarFunc";
     }
 
+    @GetMapping("/formBuscarNome")
+    public String mostrarFormBuscaFuncionario(Model oModel) {
+        return "buscarFuncionario";
+    }
+
+    @GetMapping("/buscarFuncionarioPorNome")
+    public String executarBuscaPorNome(@RequestParam("nome") String nome_funcionario, Model oModel) {
+        // O método .isEmpty() retorna true se a string estiver vazia ("").
+        // O ! (negação) inverte isso, então a condição significa:
+        // "A string não está vazia".
+        // Mas se nome_funcionario fosse null ou "vazio" = " ", o bloco não seria
+        // executado.
+        if (nome_funcionario != null && !nome_funcionario.isEmpty()) {
+            oModel.addAttribute("funcionarioNome",
+                    ligacaoFuncionarioService.buscarFuncionarioPorNome(nome_funcionario));
+            // ligacaoFuncionarioService.buscarFuncionarioPorNome(nome_funcionario) → busca
+            // o funcionário no banco
+            // de dados pelo nome.
+
+            // oModel.addAttribute(...) → envia o resultado da busca para a página.
+
+            // RESUMO
+            // "Coloca no modelo o resultado da busca do funcionário pelo nome, para mostrar
+            // na
+            // tela."
+        }
+
+        return "buscarFuncionario";
+    }
 }

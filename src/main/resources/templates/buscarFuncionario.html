@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Buscar Funcionário</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 40px;
+            background: linear-gradient(270deg, #6a0dad, #9b30ff, #4b0082, #8a2be2);
+            background-size: 800% 800%;
+            animation: gradientBG 20s ease infinite;
+            color: #e0d7f5;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .card {
+            background: linear-gradient(135deg, #6a0dad, #9b30ff);
+            padding: 40px 45px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 650px;
+            box-shadow: 0 8px 20px rgba(155, 48, 255, 0.4);
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            background: #f6edff;
+            color: #4b0082;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .search-box input:focus {
+            box-shadow: 0 0 8px 2px #bb75ff;
+        }
+
+        .btn-search {
+            padding: 12px 20px;
+            background: #ffffff;
+            color: #6a0dad;
+            font-weight: 700;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-search:hover {
+            background: #e9d6ff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.5);
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background: #f6edff;
+            border-radius: 10px;
+            overflow: hidden;
+            color: #4b0082;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background: #d7b4ff;
+            font-weight: 700;
+        }
+
+        tr:nth-child(even) {
+            background: #ede1ff;
+        }
+
+        tr:hover {
+            background: #d7b4ff;
+            transition: 0.2s ease;
+        }
+
+        h4 {
+            margin-top: 25px;
+            font-weight: 600;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <h2>Buscar Funcionário por Nome</h2>
+
+        <form th:action="@{/funcionarioCTR/buscarFuncionarioPorNome}" method="get">
+            <div class="search-box">
+                <input type="text" name="nome" th:value="${param.nome}" placeholder="Digite o nome do funcionário..." />
+                <button type="submit" class="btn-search">Buscar</button>
+            </div>
+        </form>
+
+        <div th:if="${funcionarioNome}">
+            <h4 th:text="'Resultado da busca: ' + ${funcionarioNome.size()} + ' funcionário(s) encontrado(s)'" />
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Cargo</th>
+                        <th>Salário</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="funcionario : ${funcionarioNome}">
+                        <td th:text="${funcionario.codigo}"></td>
+                        <td th:text="${funcionario.nome}"></td>
+                        <td th:text="${funcionario.cargo}"></td>
+                        <td th:text="${funcionario.salario}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -78,6 +78,9 @@ public class FuncionarioService {
         // Como o método é transacional e objFuncionario é uma entidade gerenciada,
         // as alterações serão persistidas no commit. Mas para garantir, podemos salvar.
         ligacaoFuncionarioRepository.save(objFuncionario);
+    }
 
+    public List<Funcionario> buscarFuncionarioPorNome(String nome_funcionario) {
+        return ligacaoFuncionarioRepository.findByNomeContainingIgnoreCase(nome_funcionario);
     }
 }
