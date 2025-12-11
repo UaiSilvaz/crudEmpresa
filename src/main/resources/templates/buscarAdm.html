@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Buscar Adm</title>
+</head>
+
+<body
+    style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg,#6a0dad,#9b30ff); color:#fff; min-height:100vh; display:flex; align-items:flex-start; justify-content:center; padding-top:40px;">
+    <div
+        style="background:rgba(255,255,255,0.04); padding:30px; border-radius:12px; width:100%; max-width:900px; box-shadow:0 8px 20px rgba(0,0,0,0.3);">
+        <h2 style="text-align:center; margin-bottom:18px;">Buscar Administrador por Nome</h2>
+
+        <form th:action="@{/admCTR/buscarAdmPorNome}" method="get" style="display:flex; gap:8px; margin-bottom:18px;">
+            <input type="text" name="nome" placeholder="Nome do administrador"
+                style="flex:1; padding:10px; border-radius:8px; border:none;" />
+            <button type="submit"
+                style="padding:10px 18px; border-radius:8px; background:#9b30ff; color:white; border:none; font-weight:700;">Buscar</button>
+        </form>
+
+        <div th:if="${admNome != null}">
+            <table style="width:100%; border-collapse:collapse;">
+                <thead>
+                    <tr>
+                        <th style="padding:8px; text-align:left;">ID</th>
+                        <th style="padding:8px; text-align:left;">Nome</th>
+                        <th style="padding:8px; text-align:left;">Email</th>
+                        <th style="padding:8px; text-align:left;">Login</th>
+                        <th style="padding:8px; text-align:left;">Telefone</th>
+                        <th style="padding:8px; text-align:left;">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="adm : ${admNome}">
+                        <td th:text="${adm.id_adm}" style="padding:8px;"></td>
+                        <td th:text="${adm.nome}" style="padding:8px;"></td>
+                        <td th:text="${adm.email}" style="padding:8px;"></td>
+                        <td th:text="${adm.login}" style="padding:8px;"></td>
+                        <td th:text="${adm.telefone}" style="padding:8px;"></td>
+                        <td style="padding:8px;"><a th:href="@{/admCTR/editarAdm/{id}(id=${adm.id_adm})}"
+                                style="color:#d1b3ff; text-decoration:none;">Editar</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="margin-top:12px; text-align:center;">
+            <a th:href="@{/admCTR/listarAdm}" style="color:#d1b3ff; text-decoration:none;">Voltar à lista</a>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -79,26 +79,12 @@ public class FuncionarioController {
         return "buscarFuncionario";
     }
 
-    @GetMapping("/buscarFuncionarioPorNome")
-    public String executarBuscaPorNome(@RequestParam("nome") String nome_funcionario, Model oModel) {
-        // O método .isEmpty() retorna true se a string estiver vazia ("").
-        // O ! (negação) inverte isso, então a condição significa:
-        // "A string não está vazia".
-        // Mas se nome_funcionario fosse null ou "vazio" = " ", o bloco não seria
-        // executado.
-        if (nome_funcionario != null && !nome_funcionario.isEmpty()) {
+    @GetMapping("/buscarFuncionarioNome")
+    public String executarBuscaPorNome(@RequestParam(name = "nome", required = false) String nome_funcionario,
+            Model oModel) {
+        if (nome_funcionario != null && !nome_funcionario.trim().isEmpty()) {
             oModel.addAttribute("funcionarioNome",
-                    ligacaoFuncionarioService.buscarFuncionarioPorNome(nome_funcionario));
-            // ligacaoFuncionarioService.buscarFuncionarioPorNome(nome_funcionario) → busca
-            // o funcionário no banco
-            // de dados pelo nome.
-
-            // oModel.addAttribute(...) → envia o resultado da busca para a página.
-
-            // RESUMO
-            // "Coloca no modelo o resultado da busca do funcionário pelo nome, para mostrar
-            // na
-            // tela."
+                    ligacaoFuncionarioService.buscarFuncionarioPorNome(nome_funcionario.trim()));
         }
 
         return "buscarFuncionario";

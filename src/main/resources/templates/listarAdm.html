@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Lista de Funcionários</title>
+    <title>Lista de Adms</title>
 </head>
 
 <body style="
@@ -70,7 +70,6 @@
             font-weight: 700;
             font-size: 1rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         tr:hover {
@@ -87,21 +86,10 @@
             text-decoration: none;
             border-radius: 6px;
             font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(155, 48, 255, 0.4);
-            user-select: none;
         }
 
         .action-link:hover {
-            background: #7a1ed9;
-            box-shadow: 0 4px 12px rgba(155, 48, 255, 0.6);
-            transform: scale(1.05);
-        }
-
-        .action-link:active {
-            transform: scale(0.98);
-            box-shadow: 0 1px 4px rgba(155, 48, 255, 0.3);
+            background: #7a1ed9
         }
 
         .link-nova {
@@ -116,49 +104,39 @@
             background: rgba(155, 48, 255, 0.2);
             border: 2px solid #9b30ff;
             border-radius: 8px;
-            transition: all 0.3s ease;
-            user-select: none;
         }
 
         .link-nova:hover {
             color: #fff;
-            background: #9b30ff;
-            transform: scale(1.05);
-        }
-
-        .link-nova:active {
-            transform: scale(0.98);
+            background: #9b30ff
         }
     </style>
 
     <div class="container">
-        <h2>Lista de Funcionários</h2>
+        <h2>Lista de Administradores</h2>
 
         <table>
             <thead>
                 <tr>
-                    <th>Código</th>
+                    <th>ID</th>
                     <th>Nome</th>
-                    <th>Cargo</th>
-                    <th>Salário</th>
-                    <th>Empresa</th>
+                    <th>Email</th>
+                    <th>Login</th>
+                    <th>Telefone</th>
                     <th>Ações</th>
                 </tr>
             </thead>
-
             <tbody>
-                <tr th:each="func : ${funcionarios}">
-                    <td th:text="${func.codigo}"></td>
-                    <td th:text="${func.nome}"></td>
-                    <td th:text="${func.cargo}"></td>
-                    <td th:text="${func.salario}"></td>
-                    <td th:text="${func.identificadorEmpresa.nome}"></td>
+                <tr th:each="adm : ${adms}">
+                    <td th:text="${adm.id_adm}"></td>
+                    <td th:text="${adm.nome}"></td>
+                    <td th:text="${adm.email}"></td>
+                    <td th:text="${adm.login}"></td>
+                    <td th:text="${adm.telefone}"></td>
                     <td>
-                        <a th:href="@{/funcionarioCTR/editarFunc/{id}(id=${func.codigo})}"
-                            class="action-link">Editar</a>
-
-                        <a th:href="@{/funcionarioCTR/deletarFuncionario/{id}(id=${func.codigo})}"
-                            onclick="return confirm('Deseja realmente excluir este Funcionário?')"
+                        <a th:href="@{/admCTR/editarAdm/{id}(id=${adm.id_adm})}" class="action-link">Editar</a>
+                        <a th:href="@{/admCTR/deletarAdm/{id}(id=${adm.id_adm})}"
+                            onclick="return confirm('Deseja realmente excluir este administrador?')"
                             class="action-link">Excluir</a>
                     </td>
                 </tr>
@@ -166,10 +144,7 @@
         </table>
 
         <br>
-
-        <a th:href="@{/funcionarioCTR/formFuncionario}" class="link-nova">
-            Cadastrar Novo Funcionário
-        </a>
+        <a th:href="@{/admCTR/formAdm}" class="link-nova">Novo Administrador</a>
     </div>
 
 </body>

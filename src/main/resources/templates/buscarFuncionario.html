@@ -146,15 +146,15 @@
     <div class="card">
         <h2>Buscar Funcionário por Nome</h2>
 
-        <form th:action="@{/funcionarioCTR/buscarFuncionarioPorNome}" method="get">
+        <form th:action="@{/funcionarioCTR/buscarFuncionarioNome}" method="get">
             <div class="search-box">
                 <input type="text" name="nome" th:value="${param.nome}" placeholder="Digite o nome do funcionário..." />
                 <button type="submit" class="btn-search">Buscar</button>
             </div>
         </form>
 
-        <div th:if="${funcionarioNome}">
-            <h4 th:text="'Resultado da busca: ' + ${funcionarioNome.size()} + ' funcionário(s) encontrado(s)'" />
+        <div th:if="${funcionarioNome != null}">
+            <h4 th:text="'Resultado da busca: ' + ${funcionarioNome.size()} + ' funcionário(s) encontrado(s)'"></h4>
 
             <table>
                 <thead>

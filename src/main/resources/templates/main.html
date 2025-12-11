@@ -1,94 +1,160 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
-    <title>Pagina Principal</title>
+    <title>Tela Moderna Roxa</title>
+
+    <!-- Fonte -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        /* ===========================================================
+           CONFIGURAÇÃO GLOBAL + WAVE
+        ============================================================ */
+        @import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
+
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        section {
+            position: relative;
+            width: 100%;
             height: 100vh;
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(270deg, #6a0dad, #9b30ff, #4b0082, #8a2be2);
-            background-size: 800% 800%;
-            animation: gradientBG 20s ease infinite;
-            color: #e0d7f5;
+            background: #3d0066;
         }
 
-        @keyframes gradientBG {
-            0% {
-                background-position: 0% 50%;
-            }
+        .wave {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background: #8a2be2;
+            box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
+        }
 
-            50% {
-                background-position: 100% 50%;
+        .wave span {
+            position: absolute;
+            width: 325vh;
+            height: 325vh;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -75%);
+            animation: animate 8s linear infinite;
+        }
+
+        .wave span:nth-child(1) {
+            border-radius: 45%;
+            background: rgba(50, 0, 100, 1);
+            animation-duration: 5s;
+        }
+
+        .wave span:nth-child(2) {
+            border-radius: 40%;
+            background: rgba(80, 0, 150, 0.55);
+            animation-duration: 10s;
+        }
+
+        .wave span:nth-child(3) {
+            border-radius: 42%;
+            background: rgba(120, 0, 200, 0.5);
+            animation-duration: 15s;
+        }
+
+        @keyframes animate {
+            0% {
+                transform: translate(-50%, -75%) rotate(0deg);
             }
 
             100% {
-                background-position: 0% 50%;
+                transform: translate(-50%, -75%) rotate(360deg);
             }
         }
 
-        .card {
-            background: linear-gradient(135deg, #6a0dad, #9b30ff);
-            padding: 40px 50px;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(155, 48, 255, 0.4);
-            width: 100%;
+        /* ===========================================================
+           CONTAINER + BOTÕES
+        ============================================================ */
+        .container {
+            position: relative;
+            z-index: 10;
+            width: 90%;
             max-width: 420px;
-        }
-
-        h2 {
             text-align: center;
-            margin-bottom: 30px;
-            font-weight: 700;
-            letter-spacing: 1.2px;
         }
 
-        /* Novo estilo dos links: estilo de botões elegantes */
-        .link-btn {
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            color: #fff;
+            font-weight: 600;
+            text-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
+        }
+
+        /* BOTÃO COMO <a> */
+        .botao {
             display: block;
             width: 100%;
-            padding: 14px;
-            margin: 10px 0;
-            text-align: center;
-            background: #ffffff;
-            color: #6a0dad;
-            font-weight: 700;
+            padding: 18px;
+            margin: 12px 0;
+
+            background: #b34cff;
+            color: white;
             text-decoration: none;
-            border-radius: 10px;
-            font-size: 1.05rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
-            user-select: none;
+            text-align: center;
+
+            font-size: 20px;
+            font-weight: 600;
+            border-radius: 14px;
+
+            transition: 0.25s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            cursor: pointer;
         }
 
-        .link-btn:hover {
-            background: #e9d6ff;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.5);
+        .botao:hover {
+            background: #d28bff;
+            transform: scale(1.06);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
         }
 
-        .link-btn:active {
-            transform: scale(0.97);
+        .botao:active {
+            transform: scale(0.96);
         }
     </style>
 </head>
 
 <body>
-    <div class="card">
-        <h2>Links para as páginas</h2>
 
-        <a th:href="@{/empresaCTR/viewCadEmpresa}" class="link-btn">Cadastrar Empresa</a>
-        <a th:href="@{/funcionarioCTR/formFuncionario}" class="link-btn">Cadastrar Funcionário</a>
-        <a th:href="@{/empresaCTR/listarTodasEmpresas}" class="link-btn">Listar Todas as Empresas</a>
-        <a th:href="@{/funcionarioCTR/listarFunc}" class="link-btn">Listar Todos os Funcionários</a>
-        <a th:href="@{/empresaCTR/formBuscarNome}" class="link-btn">Buscar Empresa por Nome</a>
-        <a th:href="@{/funcionarioCTR/formBuscarNome}" class="link-btn">Buscar Funcionário por Nome</a>
-    </div>
+    <section>
+        <div class="wave">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="container">
+            <h1>Escolha uma Opção</h1>
+
+            <a th:href="@{/empresaCTR/viewCadEmpresa}" class="botao">Cadastrar Empresa</a>
+            <a th:href="@{/funcionarioCTR/formFuncionario}" class="botao">Cadastrar Funcionário</a>
+            <a th:href="@{/empresaCTR/listarTodasEmpresas}" class="botao">Listar Todas as Empresas</a>
+            <a th:href="@{/funcionarioCTR/listarFunc}" class="botao">Listar Todos os Funcionários</a>
+            <a th:href="@{/empresaCTR/formBuscarNome}" class="botao">Buscar Empresa por Nome</a>
+            <a th:href="@{/funcionarioCTR/formBuscarNome}" class="botao">Buscar Funcionário por Nome</a>
+            <a th:href="@{/admCTR/formAdm}" class="botao">Cadastrar Administrador</a>
+            <a th:href="@{/admCTR/listarAdm}" class="botao">Listar Administradores</a>
+        </div>
+    </section>
+
 </body>
 
 </html>

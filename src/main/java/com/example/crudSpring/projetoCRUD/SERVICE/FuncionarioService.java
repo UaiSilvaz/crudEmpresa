@@ -81,6 +81,9 @@ public class FuncionarioService {
     }
 
     public List<Funcionario> buscarFuncionarioPorNome(String nome_funcionario) {
-        return ligacaoFuncionarioRepository.findByNomeContainingIgnoreCase(nome_funcionario);
+        if (nome_funcionario == null || nome_funcionario.trim().isEmpty()) {
+            return java.util.Collections.emptyList();
+        }
+        return ligacaoFuncionarioRepository.findByNomeContainingIgnoreCase(nome_funcionario.trim());
     }
 }
